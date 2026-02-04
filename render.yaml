@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: valentines-proposal
+    env: python
+    pythonVersion: 3.11
+    startCommand: python app.py
+    envVars:
+      - key: FLASK_ENV
+        value: production

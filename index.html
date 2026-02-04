@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Proposal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background: linear-gradient(135deg, #ff1744 0%, #ff5252 100%);
+            animation: slideUp 0.8s ease-out;
+            transition: all 0.4s ease;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            scrollbar-width: none;
+            position: relative;
+            width: 500px;
+            height: 700px;
+            border-radius: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            padding: 60px 40px 40px 40px;
+            text-align: center;
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 
+                0 0 0 2px rgba(255, 255, 255, 0.5),
+                0 20px 80px rgba(255, 23, 68, 0.5),
+                -50px 50px 60px rgba(0, 0, 0, 0.2),
+                inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        .container::before {
+            content: "💕";
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 24px;
+            z-index: 10;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        .container::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+            border-radius: 25px 25px 0 0;
+            z-index: 10;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        .container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .container::before,
+        .container::after {
+            display: none;
+        }
+
+        .container > * {
+            position: relative;
+            z-index: 2;
+            color: white;
+        }
+
+        .container h1 {
+            color: white !important;
+            font-size: 28px;
+            margin: 0 0 15px 0 !important;
+            text-shadow: 0 3px 15px rgba(0, 0, 0, 0.3);
+            line-height: 1.3;
+            font-weight: 900;
+            letter-spacing: 0.5px;
+        }
+
+        .container p {
+            color: rgba(255, 255, 255, 0.95) !important;
+            font-size: 14px;
+            line-height: 1.5;
+            margin: 10px 0 !important;
+        }
+
+        .container .button-group {
+            z-index: 3;
+            position: relative;
+        }
+
+        @keyframes shrinkDown {
+            0% { transform: scale(1); }
+            100% { transform: scale(0.8); }
+        }
+
+        @keyframes containerBreak1 {
+            0% { filter: drop-shadow(0 0 0px rgba(0,0,0,0)); }
+            100% { filter: drop-shadow(-3px -3px 8px rgba(0,0,0,0.4)); background: linear-gradient(135deg, #ff1744 0%, #ff5252 100%); }
+        }
+
+        @keyframes containerBreak2 {
+            0% { filter: drop-shadow(-3px -3px 8px rgba(0,0,0,0.4)); background: linear-gradient(135deg, #ff1744 0%, #ff5252 100%); }
+            100% { filter: drop-shadow(-6px -6px 12px rgba(0,0,0,0.5)); background: linear-gradient(135deg, #e60000 0%, #ff1744 100%); }
+        }
+
+        @keyframes containerBreak3 {
+            0% { filter: drop-shadow(-6px -6px 12px rgba(0,0,0,0.5)); background: linear-gradient(135deg, #e60000 0%, #ff1744 100%); }
+            100% { filter: drop-shadow(-10px -10px 18px rgba(0,0,0,0.6)); background: linear-gradient(135deg, #cc0000 0%, #e60000 100%); }
+        }
+
+        @keyframes containerBreak4 {
+            0% { filter: drop-shadow(-10px -10px 18px rgba(0,0,0,0.6)); background: linear-gradient(135deg, #cc0000 0%, #e60000 100%); }
+            100% { filter: drop-shadow(-15px -15px 25px rgba(0,0,0,0.7)); background: linear-gradient(135deg, #990000 0%, #cc0000 100%); }
+        }
+
+        @keyframes containerBreak5 {
+            0% { filter: drop-shadow(-15px -15px 25px rgba(0,0,0,0.7)); background: linear-gradient(135deg, #990000 0%, #cc0000 100%); }
+            100% { filter: drop-shadow(-20px -20px 35px rgba(0,0,0,0.8)); background: linear-gradient(135deg, #660000 0%, #990000 100%); opacity: 0.95; }
+        }
+
+        .container.breaking-1 { animation: containerBreak1 0.4s ease-out forwards !important; }
+        .container.breaking-2 { animation: containerBreak2 0.4s ease-out forwards !important; }
+        .container.breaking-3 { animation: containerBreak3 0.4s ease-out forwards !important; }
+        .container.breaking-4 { animation: containerBreak4 0.4s ease-out forwards !important; }
+        .container.breaking-5 { animation: containerBreak5 0.4s ease-out forwards !important; }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .heart-container {
+            font-size: 48px;
+            margin-bottom: 8px;
+            animation: heartBeat 1.5s infinite;
+            z-index: 3;
+            position: relative;
+        }
+
+        @keyframes heartBeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.1); }
+            50% { transform: scale(1.2); }
+        }
+
+        #proposal {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 3;
+            position: relative;
+            padding: 20px;
+        }
+
+        .stars {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin: 6px 0 10px 0;
+            font-size: 22px;
+            z-index: 3;
+            position: relative;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 12px;
+            z-index: 3;
+            position: relative;
+        }
+
+        button {
+            padding: 10px 28px;
+            font-size: 15px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .yes-btn {
+            background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%);
+            color: #ff1744;
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.4);
+            font-weight: bold;
+            border: none;
+        }
+
+        .yes-btn:hover {
+            transform: scale(1.08);
+            box-shadow: 0 15px 40px rgba(255, 255, 255, 0.6);
+            background: linear-gradient(135deg, #ffffff 0%, #ffffff 100%);
+        }
+
+        .no-btn {
+            background: rgba(255, 255, 255, 0.15);
+            color: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border: 2px solid rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(10px);
+        }
+
+        .no-btn:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: scale(0.98);
+            border-color: rgba(255, 255, 255, 0.8);
+        }
+
+        .success-message {
+            display: none;
+            animation: popIn 0.6s ease-out;
+            width: 100%;
+        }
+
+        @keyframes popIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            pointer-events: none;
+        }
+
+        .rose-animation {
+            animation: roseFloat 2s ease-out forwards;
+        }
+
+        @keyframes roseFloat {
+            0% {
+                opacity: 1;
+                transform: translateY(0) translateX(0);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-300px) translateX(100px);
+            }
+        }
+
+        .big-heart {
+            font-size: 200px;
+            animation: scaleIn 0.8s ease-out;
+        }
+
+        @keyframes scaleIn {
+            from {
+                transform: scale(0);
+            }
+            to {
+                transform: scale(1);
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
+        }
+
+        .stars span {
+            animation: twinkle 1s infinite;
+        }
+
+        .stars span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .stars span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        .celebration-animation {
+            animation: celebrateBounce 0.6s ease-out;
+        }
+
+        @keyframes celebrateBounce {
+            0% {
+                transform: scale(0.3) rotateZ(-10deg);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(1.2) rotateZ(5deg);
+            }
+            100% {
+                transform: scale(1) rotateZ(0deg);
+                opacity: 1;
+            }
+        }
+
+        .success-message {
+            display: none;
+            animation: popIn 0.6s ease-out;
+            background: linear-gradient(135deg, #ff1744 0%, #ff5252 100%);
+            color: white;
+            border-radius: 20px;
+            padding: 60px 40px;
+        }
+
+        .success-message h1 {
+            color: white;
+            font-size: 52px;
+            animation: celebrateBounce 0.8s ease-out;
+        }
+
+        .success-message .message {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 20px;
+            line-height: 2;
+            margin: 30px 0;
+        }
+
+        .gratitude-section {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 30px 0;
+            border-left: 5px solid white;
+            animation: slideInUp 0.8s ease-out 0.3s both;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .gratitude-section h2 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: white;
+        }
+
+        .gratitude-section p {
+            color: rgba(255, 255, 255, 0.95);
+            font-size: 18px;
+            line-height: 1.8;
+            margin: 12px 0;
+        }
+
+        .hearts-dance {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            font-size: 50px;
+            margin: 20px 0;
+            animation: dancingHearts 1s ease-in-out infinite;
+        }
+
+        @keyframes dancingHearts {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .hearts-dance span:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .hearts-dance span:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+
+        .forever-message {
+            font-size: 28px;
+            font-weight: bold;
+            color: white;
+            margin-top: 20px;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .heart-breaking-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 5000;
+            display: none;
+            width: 200px;
+            height: 200px;
+        }
+
+        .heart-breaking-container::before,
+        .heart-breaking-container::after {
+            content: '';
+            position: absolute;
+            width: 100px;
+            height: 160px;
+            background: #ff1744;
+            border-radius: 100px 100px 0 0;
+        }
+
+        .heart-breaking-container::before {
+            left: 100px;
+            transform: rotate(-45deg);
+            transform-origin: 0 100%;
+        }
+
+        .heart-breaking-container::after {
+            right: 100px;
+            transform: rotate(45deg);
+            transform-origin: 100% 100%;
+        }
+
+        .breaking-heart {
+            font-size: 200px;
+            animation: heartPulse 0.3s ease-out;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 5001;
+        }
+
+        @keyframes heartPulse {
+            0% { transform: scale(0.8); opacity: 0; }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        .breaking-heart.crack-1 {
+            animation: crack1 0.4s ease-out forwards;
+        }
+
+        @keyframes crack1 {
+            0% { 
+                filter: brightness(1) drop-shadow(0 0 0px rgba(0,0,0,0)); 
+                transform: translate(-50%, -50%);
+            }
+            100% { 
+                filter: brightness(0.95) drop-shadow(-5px -5px 10px rgba(0,0,0,0.5)) saturate(0.9);
+                transform: translate(-50%, -50%) scaleX(0.98) scaleY(0.95);
+                text-shadow: 
+                    -3px -3px 0 rgba(0,0,0,0.3),
+                    3px -3px 0 rgba(0,0,0,0.2),
+                    -3px 3px 0 rgba(0,0,0,0.2),
+                    0 -5px 0 rgba(0,0,0,0.1);
+            }
+        }
+
+        .breaking-heart.crack-2 {
+            animation: crack2 0.4s ease-out forwards;
+        }
+
+        @keyframes crack2 {
+            0% { 
+                filter: brightness(0.95) drop-shadow(-5px -5px 10px rgba(0,0,0,0.5)) saturate(0.9);
+                transform: translate(-50%, -50%) scaleX(0.98) scaleY(0.95);
+            }
+            100% { 
+                filter: brightness(0.85) drop-shadow(-8px -8px 15px rgba(0,0,0,0.6)) saturate(0.75) contrast(1.1);
+                transform: translate(-50%, -50%) scaleX(0.95) scaleY(0.92) rotate(-3deg);
+                text-shadow: 
+                    -6px -6px 0 rgba(0,0,0,0.4),
+                    6px -6px 0 rgba(0,0,0,0.3),
+                    -6px 6px 0 rgba(0,0,0,0.3),
+                    0 -8px 0 rgba(0,0,0,0.2);
+            }
+        }
+
+        .breaking-heart.crack-3 {
+            animation: crack3 0.4s ease-out forwards;
+        }
+
+        @keyframes crack3 {
+            0% { 
+                filter: brightness(0.85) drop-shadow(-8px -8px 15px rgba(0,0,0,0.6)) saturate(0.75) contrast(1.1);
+                transform: translate(-50%, -50%) scaleX(0.95) scaleY(0.92) rotate(-3deg);
+            }
+            100% { 
+                filter: brightness(0.7) drop-shadow(-10px -10px 20px rgba(0,0,0,0.7)) saturate(0.5) contrast(1.2);
+                transform: translate(-50%, -50%) scaleX(0.90) scaleY(0.85) rotate(5deg);
+                text-shadow: 
+                    -8px -8px 2px rgba(0,0,0,0.5),
+                    8px -8px 2px rgba(0,0,0,0.4),
+                    -8px 8px 2px rgba(0,0,0,0.4),
+                    8px 8px 2px rgba(0,0,0,0.3),
+                    0 -10px 3px rgba(0,0,0,0.3);
+            }
+        }
+
+        .breaking-heart.crack-4 {
+            animation: crack4 0.5s ease-out forwards;
+        }
+
+        @keyframes crack4 {
+            0% { 
+                filter: brightness(0.7) drop-shadow(-10px -10px 20px rgba(0,0,0,0.7)) saturate(0.5) contrast(1.2);
+                transform: translate(-50%, -50%) scaleX(0.90) scaleY(0.85) rotate(5deg);
+                opacity: 1;
+            }
+            70% { 
+                filter: brightness(0.5) drop-shadow(-12px -12px 25px rgba(0,0,0,0.8)) saturate(0.3) contrast(1.3);
+                opacity: 0.7;
+            }
+            100% { 
+                filter: brightness(0.3) drop-shadow(-15px -15px 30px rgba(0,0,0,0.9)) saturate(0) contrast(1.4);
+                transform: translate(-50%, -50%) scaleX(0.8) scaleY(0.75) rotate(-8deg);
+                opacity: 0.5;
+                text-shadow: 
+                    -10px -10px 5px rgba(0,0,0,0.7),
+                    10px -10px 5px rgba(0,0,0,0.6),
+                    -10px 10px 5px rgba(0,0,0,0.6),
+                    10px 10px 5px rgba(0,0,0,0.5),
+                    0 -15px 8px rgba(0,0,0,0.6);
+            }
+        }
+
+        .breaking-heart.shatter {
+            animation: shatter 0.6s ease-out forwards;
+        }
+
+        @keyframes shatter {
+            0% {
+                transform: translate(-50%, -50%) scale(1) rotate(0deg);
+                opacity: 1;
+                filter: brightness(0.3) drop-shadow(-15px -15px 30px rgba(0,0,0,0.9)) saturate(0) contrast(1.4);
+            }
+            30% {
+                transform: translate(-50%, -50%) scale(1.3) rotate(20deg);
+                opacity: 0.9;
+                filter: brightness(0.1) drop-shadow(-20px -20px 40px rgba(0,0,0,1)) saturate(0) contrast(1.5) blur(1px);
+            }
+            60% {
+                transform: translate(-50%, -50%) scale(0.8) rotate(-15deg);
+                opacity: 0.5;
+                filter: brightness(0) drop-shadow(-25px -25px 50px rgba(0,0,0,1)) blur(3px);
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(0.1) rotate(-45deg);
+                opacity: 0;
+                filter: brightness(0) drop-shadow(-30px -30px 60px rgba(0,0,0,1)) blur(5px);
+            }
+        }
+
+        .crying-emoji {
+            font-size: 180px;
+            animation: cryingAppear 0.5s ease-out forwards;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            z-index: 5002;
+        }
+
+        @keyframes cryingAppear {
+            0% {
+                transform: translate(-50%, -50%) scale(0) rotate(180deg);
+                opacity: 0;
+            }
+            70% {
+                transform: translate(-50%, -50%) scale(1.1) rotate(-10deg);
+            }
+            100% {
+                transform: translate(-50%, -50%) scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
+
+        .crying-emoji.sad-bounce {
+            animation: sadBounce 1s ease-in-out infinite;
+        }
+
+        @keyframes sadBounce {
+            0%, 100% { transform: translate(-50%, -50%) translateY(0) rotate(0deg); }
+            25% { transform: translate(-50%, -50%) translateY(-15px) rotate(-2deg); }
+            50% { transform: translate(-50%, -50%) translateY(0) rotate(2deg); }
+            75% { transform: translate(-50%, -50%) translateY(-10px) rotate(-1deg); }
+        }
+
+        .kitten-container {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 6000;
+            display: none;
+            text-align: center;
+        }
+
+        .kitten-character {
+            font-size: 200px;
+            animation: kittenAppear 0.8s ease-out forwards;
+            margin-bottom: -30px;
+        }
+
+        @keyframes kittenAppear {
+            0% {
+                transform: scale(0) rotate(180deg);
+                opacity: 0;
+            }
+            70% {
+                transform: scale(1.15) rotate(-10deg);
+            }
+            100% {
+                transform: scale(1) rotate(0deg);
+                opacity: 1;
+            }
+        }
+
+        .heart-button {
+            font-size: 120px;
+            cursor: pointer;
+            display: inline-block;
+            animation: heartFloating 2s ease-in-out infinite;
+            transition: transform 0.2s;
+            margin-top: 20px;
+        }
+
+        .heart-button:hover {
+            transform: scale(1.1);
+        }
+
+        .heart-button:active {
+            transform: scale(0.95);
+        }
+
+        @keyframes heartFloating {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .kitten-message {
+            color: #ff1744;
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 20px;
+            animation: slideInUp 0.8s ease-out 0.3s both;
+        }
+
+        /* ===== MOBILE RESPONSIVE STYLES ===== */
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                width: 90vw;
+                max-width: 400px;
+                height: auto;
+                min-height: 600px;
+                padding: 50px 30px 30px 30px;
+                border-radius: 20px;
+            }
+
+            .container::before {
+                top: 10px;
+                font-size: 20px;
+            }
+
+            .container h1 {
+                font-size: 24px;
+                margin: 0 0 12px 0 !important;
+            }
+
+            .container p {
+                font-size: 14px;
+                margin: 8px 0 !important;
+            }
+
+            .heart-container {
+                font-size: 40px;
+                margin-bottom: 6px;
+            }
+
+            .stars {
+                gap: 6px;
+                margin: 6px 0 10px 0;
+                font-size: 20px;
+            }
+
+            .button-group {
+                gap: 10px;
+                margin-top: 10px;
+                width: 100%;
+            }
+
+            button {
+                padding: 10px 24px;
+                font-size: 14px;
+                min-width: 120px;
+            }
+
+            .success-message {
+                padding: 40px 25px;
+            }
+
+            .success-message h1 {
+                font-size: 22px;
+            }
+
+            .success-message .message {
+                font-size: 14px;
+            }
+
+            .gratitude-section {
+                padding: 20px;
+                margin: 20px 0;
+            }
+
+            .gratitude-section h2 {
+                font-size: 18px;
+                margin-bottom: 12px;
+            }
+
+            .gratitude-section p {
+                font-size: 14px;
+                margin: 10px 0;
+            }
+
+            .hearts-dance {
+                gap: 10px;
+                font-size: 40px;
+                margin: 15px 0;
+            }
+
+            .forever-message {
+                font-size: 20px;
+            }
+
+            .kitten-container {
+                text-align: center;
+                padding: 20px;
+            }
+
+            .kitten-character {
+                font-size: 150px;
+            }
+
+            .heart-button {
+                font-size: 80px;
+            }
+
+            .kitten-message {
+                font-size: 18px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                width: 95vw;
+                padding: 45px 20px 20px 20px;
+                min-height: 550px;
+            }
+
+            .container h1 {
+                font-size: 20px;
+            }
+
+            .container p {
+                font-size: 13px;
+            }
+
+            .heart-container {
+                font-size: 36px;
+            }
+
+            .stars {
+                font-size: 18px;
+                gap: 5px;
+            }
+
+            button {
+                padding: 10px 20px;
+                font-size: 13px;
+                min-width: 100px;
+            }
+
+            .yes-btn:hover {
+                transform: scale(1.05);
+            }
+
+            .no-btn:hover {
+                transform: scale(0.98);
+            }
+
+            .success-message {
+                padding: 30px 20px;
+            }
+
+            .kitten-character {
+                font-size: 120px;
+            }
+
+            .heart-button {
+                font-size: 60px;
+            }
+
+            .kitten-message {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>    <div class=\"heart-breaking-container\" id=\"heartBreakingContainer\">
+        <div class=\"breaking-heart\" id=\"breakingHeart\">❤️</div>
+    </div>
+
+    <div class="container" id="mainContainer">
+        <div id="proposal">
+            <div class="heart-container">❤️</div>
+            <h1 id="proposalTitle">Shaleene, My Khaleesi, Will You Be My Valentine?</h1>
+            <div class="stars">
+                <span>✨</span>
+                <span>💕</span>
+                <span>✨</span>
+            </div>
+            <p class="message">
+                You are my khaleesi, my queen, my everything. Your strength, beauty, and love 
+                have changed my life forever. Will you honor me by being my Valentine and let me 
+                spend forever showing you how much you mean to me?
+            </p>
+            <div class="button-group">
+                <button class="yes-btn" onclick="handleYes()">YES! 💕</button>
+                <button class="no-btn" id="noBtn" onclick="handleNo()">No</button>
+            </div>
+        </div>
+
+        <div id="successMessage" class="success-message">
+            <div class="celebration-animation">
+                <div style="font-size: 150px; text-align: center; animation: celebrateBounce 0.8s ease-out;">💕</div>
+            </div>
+            <h1 id="successTitle">You Make Me The Happiest Person! 🎉</h1>
+            
+            <div class="hearts-dance">
+                <span>💕</span>
+                <span>💖</span>
+                <span>💝</span>
+            </div>
+
+            <div class="gratitude-section">
+                <h2>Thank You From The Bottom Of My Heart 🙏</h2>
+                <p>
+                    By saying yes, you've given me the greatest gift - the chance to spend my life 
+                    with the most amazing person I know. Every moment with you is a blessing.
+                </p>
+                <p>
+                    Your kindness, your laugh, your presence - you light up my world in ways 
+                    I could never put into words. Thank you for choosing me, for believing in us, 
+                    and for making every day feel like an adventure.
+                </p>
+                <p>
+                    I promise to cherish you, support you, and love you with all my heart. 
+                    Together, we'll create beautiful memories that will last forever.
+                </p>
+            </div>
+
+            <p class="message">
+                🌹 I love you more than words can express 🌹
+            </p>
+
+            <div class="forever-message">Forever Starts Now ✨</div>
+        </div>
+    </div>
+
+    <div class="kitten-container" id="kittenContainer">
+        <div class="kitten-character">🥺😻</div>
+        <div class="kitten-message">Please...? 💔</div>
+        <div class="heart-button" id="heartButton" onclick="handleHeartClick()">💕</div>
+    </div>
+
+    <script src="proposal.js"></script>
+</body>
+</html>
