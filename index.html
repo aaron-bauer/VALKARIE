@@ -216,6 +216,7 @@
             letter-spacing: 0.5px;
             z-index: 10;
             position: relative;
+            pointer-events: auto !important;
         }
 
         .yes-btn {
@@ -955,8 +956,8 @@
                 spend forever showing you how much you mean to me?
             </p>
             <div class="button-group">
-                <button class="yes-btn" onclick="handleYes()">YES! 💕</button>
-                <button class="no-btn" id="noBtn" onclick="handleNo()">No</button>
+                <button class="yes-btn" onclick="console.log('YES clicked'); handleYes(); return false;" type="button">YES! 💕</button>
+                <button class="no-btn" id="noBtn" onclick="console.log('NO clicked'); handleNo(); return false;" type="button">No</button>
             </div>
         </div>
 
