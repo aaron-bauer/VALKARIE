@@ -121,5 +121,6 @@ if __name__ == '__main__':
     print("  GET  /responses")
     print("  GET  /stats")
     print("=" * 50)
+    print("✨ All systems ready! ✨")
     
     app.run(host='0.0.0.0', port=port, debug=debug)
