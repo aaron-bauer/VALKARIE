@@ -27,6 +27,12 @@ def index():
     """Serve the index.html file"""
     return send_from_directory('.', 'index.html')
 
+
+@app.route('/background-music.mp3')
+def background_music():
+    """Serve the background music file from project root for Render deployments."""
+    return send_from_directory('.', 'background-music.mp3')
+
 @app.route('/proposal', methods=['POST'])
 def handle_proposal():
     """Handle proposal response"""
