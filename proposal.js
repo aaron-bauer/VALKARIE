@@ -1,16 +1,14 @@
 // ===== EDITABLE: Change the name here =====
 let personName = 'Delyne'; // Change this to the person's name
 // ==========================================
-
 let noClickCount = 0;
-const maxScaleSteps = 10;
 
 // Handle Yes button click
 function handleYes() {
     try {
         console.log('YES button clicked!');
-        const proposal = document.getElementById('proposal');
-        const successMessage = document.getElementById('successMessage');
+        const proposal = document.querySelector('#proposal');
+        const successMessage = document.querySelector('#successMessage');
 
         console.log('Proposal element:', proposal);
         console.log('Success message element:', successMessage);
@@ -19,32 +17,32 @@ function handleYes() {
         successMessage.classList.add('show');
 
         // Update success message with name
+        const successTitle = document.querySelector('#successTitle');
+        successTitle.textContent = `${personName}, You Make Me The Happiest Person! 🎉`;
+
+        // Trigger massive celebration animations
+        createConfetti();
+        playRoseAnimation();
+        playCelebrationSounds();
+
+        // Send to backend
+        sendProposalResult('YES').catch(e => console.error("Error sending result:", e));
     } catch (e) {
         console.error("Error in handleYes:", e);
     }
-    const successTitle = document.getElementById('successTitle');
-    successTitle.textContent = `${personName}, You Make Me The Happiest Person! 🎉`;
-    
-    // Trigger massive celebration animations
-    createConfetti();
-    playRoseAnimation();
-    playCelebrationSounds();
-    
-    // Send to backend
-    sendProposalResult('YES').catch(e => console.error("Error sending result:", e));
 }
 
 // Play celebration effects
 function playCelebrationSounds() {
     // Create visual effects - screen shake and light burst
-    const container = document.getElementById('mainContainer');
-    const audio = document.getElementById('backgroundMusic');
-    
+    const container = document.querySelector('#mainContainer');
+    const audio = document.querySelector('#backgroundMusic');
+
     // Continue playing music (don't reset it) - just make sure it's playing
     if (audio.paused) {
         audio.play().catch(() => console.log('Music playback failed'));
     }
-    
+
     // Shake effect
     for (let i = 0; i < 5; i++) {
         setTimeout(() => {
@@ -52,7 +50,6 @@ function playCelebrationSounds() {
             container.style.transform = `translate(${shake}px, 0px)`;
         }, i * 50);
     }
-    
     setTimeout(() => {
         container.style.transform = 'translate(0, 0)';
     }, 250);
@@ -73,28 +70,28 @@ function playCelebrationSounds() {
 function handleNo() {
     console.log('NO button clicked!');
     noClickCount++;
-    const container = document.getElementById('mainContainer');
-    const kittenContainer = document.getElementById('kittenContainer');
-    
+    const container = document.querySelector('#mainContainer');
+    const kittenContainer = document.querySelector('#kittenContainer');
+
     console.log('No clicked! Count:', noClickCount);
-    
+
     // Calculate new scale (shrinks by 15% each click)
     const newScale = Math.max(0.2, 1 - (noClickCount * 0.15));
     container.style.transform = `scale(${newScale})`;
-    
+
     if (noClickCount >= 5) {
         console.log('5 clicks reached! Showing kitten');
-        
+
         // Hide the proposal after a short delay
         setTimeout(() => {
-            document.getElementById('proposal').style.display = 'none';
+            document.querySelector('#proposal').style.display = 'none';
             kittenContainer.style.display = 'block';
         }, 300);
     }
-    
+
     // Send to backend
     sendProposalResult('NO', noClickCount).catch(e => console.error("Error sending result:", e));
-}
+};
 
 // Handle heart click (acts as yes)
 function handleHeartClick() {
@@ -107,15 +104,15 @@ function handleHeartClick() {
 function createConfetti() {
     const confettiCount = 150; // Increased for huge celebration
     const colors = ['#ff1744', '#ff5252', '#ff6e40', '#ffd700', '#ff69b4', '#ff1493', '#ff4500'];
-    
+
     for (let i = 0; i < confettiCount; i++) {
         const confetti = document.createElement('div');
         confetti.className = 'confetti';
         confetti.style.left = Math.random() * 100 + '%';
         confetti.style.top = '-10px';
         confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
-        confetti.style.borderRadius = Math.random() > 0.5 ? '50%' : '0';
-        confetti.style.width = (5 + Math.random() * 10) + 'px';
+        confetti.style.borderRadius = '50%';
+        confetti.style.width = '10px';
         confetti.style.height = confetti.style.width;
         
         document.body.appendChild(confetti);
@@ -124,38 +121,40 @@ function createConfetti() {
         const duration = 2.5 + Math.random() * 1.5;
         const xMove = (Math.random() - 0.5) * 400; // More horizontal spread
         const rotation = Math.random() * 720; // More spinning
-        
+
         confetti.animate([
             {
                 transform: 'translateY(0) translateX(0) rotate(0deg) scale(1)',
                 opacity: 1
             },
             {
-                transform: `translateY(${window.innerHeight + 10}px) translateX(${xMove}px) rotate(${rotation}deg) scale(0.5)`,
+                transform: `translateY(${window.innerHeight + 10}px) translateX(${xMove}px) rotate(${rotation}deg) scale(0)`,
                 opacity: 0
             }
         ], {
             duration: duration * 1000,
             easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
         });
-        
+
         // Remove element after animation
         setTimeout(() => {
             confetti.remove();
         }, duration * 1000);
     }
-}
+};
 
 // Music-synced confetti bursts (smaller bursts in sync with beats)
 function createMusicSyncedConfetti() {
     const confettiCount = 30;
     const colors = ['#ff1744', '#ff5252', '#ff6e40', '#ffd700', '#ff69b4'];
-    
+
     for (let i = 0; i < confettiCount; i++) {
         const confetti = document.createElement('div');
         confetti.className = 'confetti';
         confetti.style.left = Math.random() * 100 + '%';
-        confetti.style.top = Math.random() * 30 + '%';
+        confetti.style.top = Math.random() * 50 + '%';
+        confetti.style.width = '8px';
+        confetti.style.height = '8px';
         confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
         confetti.style.borderRadius = '50%';
         confetti.style.width = (3 + Math.random() * 6) + 'px';
@@ -179,14 +178,14 @@ function createMusicSyncedConfetti() {
             duration: duration * 1000,
             easing: 'ease-out'
         });
-        
+
         setTimeout(() => {
             confetti.remove();
         }, duration * 1000);
     }
-}
+};
 
-// Rose floating animation
+//Rose floating animation
 function playRoseAnimation() {
     const roses = ['🌹', '💐', '🌷', '🌺', '💕', '💖', '💝'];
     const roseCount = 25; // Increased for bigger celebration
@@ -208,12 +207,12 @@ function playRoseAnimation() {
                 rose.remove();
             }, 2500);
         }, i * 100);
-    }
-}
+    };
+};
 
 // Send proposal result to Python backend
 async function sendProposalResult(response) {
-    try {
+   try {
         const result = await fetch('/proposal', {
             method: 'POST',
             headers: {
@@ -224,7 +223,7 @@ async function sendProposalResult(response) {
                 timestamp: new Date().toISOString()
             })
         });
-        
+
         if (result.ok) {
             const data = await result.json();
             console.log('Proposal logged:', data);
@@ -237,14 +236,14 @@ async function sendProposalResult(response) {
 // Create fireworks effect
 function createFireworks() {
     const fireworkCount = 20;
-    
+
     for (let i = 0; i < fireworkCount; i++) {
         setTimeout(() => {
             const firework = document.createElement('div');
             firework.style.position = 'fixed';
             firework.style.width = '20px';
             firework.style.height = '20px';
-            firework.style.borderRadius = '50%';
+             firework.style.borderRadius = '50%';
             firework.style.pointerEvents = 'none';
             firework.style.zIndex = '10000';
             
@@ -261,7 +260,7 @@ function createFireworks() {
             const velocity = 5 + Math.random() * 5;
             const endX = Math.cos(angle) * velocity * 100;
             const endY = Math.sin(angle) * velocity * 100;
-            
+
             firework.animate([
                 {
                     transform: 'translate(0, 0) scale(1)',
@@ -275,36 +274,38 @@ function createFireworks() {
                 duration: 1000,
                 easing: 'cubic-bezier(0.25, 0.46, 0.45, 0.94)'
             });
-            
+
             setTimeout(() => {
                 firework.remove();
             }, 1000);
         }, i * 50);
     }
-}
+};
 
 // Add page load animation
 window.addEventListener('load', () => {
-    const container = document.querySelector('.container');
-    container.style.animation = 'slideUp 0.8s ease-out';
+     const container = document.querySelector('.container');
+     container.style.animation = 'slideUp 0.8s ease-out';
 });
 
 // Robust event listener attachment
 function attachButtonListeners() {
-    const yesBtn = document.getElementById('yesBtn');
-    const noBtn = document.getElementById('noBtn');
+    const yesBtn = document.querySelector('#yesBtn');
+    const noBtn = document.querySelector('#noBtn');
 
-    if (yesBtn && noBtn) {
-        yesBtn.addEventListener('click', handleYes);
-        noBtn.addEventListener('click', handleNo);
-        console.log('Button listeners attached successfully');
-    }
+   if (yesBtn && noBtn) {
+       yesBtn.addEventListener('click', handleYes);
+       noBtn.addEventListener('click', handleNo);
+       console.log('Button listeners attached successfully');
+   } else {
+       console.error("Yes or No button not found!");
+   }
 }
 
 // Check if DOM is already loaded or still loading
 if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', attachButtonListeners);
+   document.addEventListener('DOMContentLoaded', attachButtonListeners);
 } else {
     // DOM is already ready, attach immediately
-    attachButtonListeners();
+   attachButtonListeners();
 }
