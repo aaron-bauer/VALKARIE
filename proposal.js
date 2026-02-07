@@ -285,8 +285,8 @@ function createFireworks() {
 };
 
 // ===== START FUNCTION (Called when overlay is clicked) =====
-window.startCelebration = function() {
-     console.log("Starting celebration sequence...");
+window.initProposal = function() {
+     console.log("Starting proposal sequence...");
      const container = document.querySelector('.container');
      
      // Reset animation
@@ -301,14 +301,9 @@ window.startCelebration = function() {
          audio.play().catch(e => console.log("Audio play failed:", e));
      }
 
-     // Trigger animations
-     createConfetti();
-     playRoseAnimation();
-     playCelebrationSounds();
-     
-     // Ensure the success title has the correct name
-     const successTitle = document.querySelector('#successTitle');
-     if (successTitle) successTitle.textContent = `${personName}, You Make Me The Happiest Person! 🎉`;
+     // Ensure correct state (Show Proposal, Hide Success)
+     document.querySelector('#proposal').style.display = 'flex';
+     document.querySelector('#successMessage').classList.remove('show');
 };
 
 // --- Attach Event Listeners ---
