@@ -1,7 +1,7 @@
 console.log('✅ proposal.js script loaded and is executing.');
 
 // ===== EDITABLE: Change the name here =====
-let personName = 'Mitchell🌹 S'; // Change this to the person's name
+let personName = 'Mitchelle🌹'; // Change this to the person's name
 // ==========================================
 let noClickCount = 0;
 
